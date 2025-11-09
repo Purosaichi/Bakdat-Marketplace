@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Marketplace 5 Toko</title>
+    <link rel="stylesheet" href="login-style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <h1><i class="fas fa-store"></i> Marketplace 5 Toko</h1>
+                <p>Silakan login untuk melanjutkan</p>
+            </div>
+            
+            <form id="login-form" class="login-form">
+                <div class="form-group">
+                    <label for="login-credential">
+                        <i class="fas fa-user"></i> Email atau Nomor Telepon
+                    </label>
+                    <input type="text" id="login-credential" name="credential" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="login-password">
+                        <i class="fas fa-lock"></i> Password
+                    </label>
+                    <input type="password" id="login-password" name="password" required>
+                    <button type="button" id="toggle-password" class="toggle-password">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+
+                <div class="form-group">
+                    <label for="user-type">
+                        <i class="fas fa-users"></i> Login Sebagai
+                    </label>
+                    <select id="user-type" name="user_type" required>
+                        <option value="customer">Customer</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="btn-login">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+            </form>
+            
+            <div class="login-footer">
+                <p>Belum punya akun? <a href="#" id="show-register">Daftar di sini</a></p>
+            </div>
+        </div>
+
+        <!-- Register Card -->
+        <div class="login-card register-card" style="display: none;">
+            <div class="login-header">
+                <h1><i class="fas fa-user-plus"></i> Daftar Akun Baru</h1>
+                <p>Buat akun untuk mulai berbelanja</p>
+            </div>
+            
+            <form id="register-form" class="login-form">
+                <div class="form-group">
+                    <label for="register-fullname">
+                        <i class="fas fa-id-card"></i> Nama Lengkap
+                    </label>
+                    <input type="text" id="register-fullname" name="full_name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="register-email">
+                        <i class="fas fa-envelope"></i> Email
+                    </label>
+                    <input type="email" id="register-email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="register-phone">
+                        <i class="fas fa-phone"></i> Nomor Telepon
+                    </label>
+                    <input type="tel" id="register-phone" name="phone">
+                </div>
+                
+                <div class="form-group">
+                    <label for="register-password">
+                        <i class="fas fa-lock"></i> Password
+                    </label>
+                    <input type="password" id="register-password" name="password" required>
+                    <button type="button" id="toggle-register-password" class="toggle-password">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+
+                <div class="form-group">
+                    <label for="register-confirm-password">
+                        <i class="fas fa-lock"></i> Konfirmasi Password
+                    </label>
+                    <input type="password" id="register-confirm-password" name="confirm_password" required>
+                </div>
+                
+                <button type="submit" class="btn-login">
+                    <i class="fas fa-user-plus"></i> Daftar
+                </button>
+            </form>
+            
+            <div class="login-footer">
+                <p>Sudah punya akun? <a href="#" id="show-login">Login di sini</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="loading" class="loading" style="display: none;">
+        <div class="spinner"></div>
+        <p>Memproses...</p>
+    </div>
+
+    <script src="login-script.js"></script>
+</body>
+</html>

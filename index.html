@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bakdat Marketplace</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-store"></i> Bakdat Marketplace</h1>
+            <div class="header-controls">
+                <button id="cart-btn" class="btn-cart">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div id="main-header">
+            <!-- Header akan berubah sesuai view -->
+        </div>
+        <div class="content-container" id="content-container">
+            <!-- Konten toko/produk akan diisi oleh JavaScript -->
+        </div>
+    </main>
+
+    <!-- Modal Keranjang -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Keranjang Belanja</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="cart-items">
+                    <!-- Item keranjang akan diisi oleh JavaScript -->
+                </div>
+                <div class="cart-total">
+                    <h3>Total: Rp <span id="total-amount">0</span></h3>
+                </div>
+                <div class="cart-actions">
+                    <button id="checkout-btn" class="btn-primary">Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Chat -->
+    <div id="chat-modal" class="modal">
+        <div class="modal-content chat-modal">
+            <div class="modal-header">
+                <h2>Chat dengan Penjual</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="chat-messages">
+                    <!-- Pesan chat akan diisi oleh JavaScript -->
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="chat-input" placeholder="Ketik pesan Anda...">
+                    <button id="send-btn"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Pembayaran -->
+    <div id="payment-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Pembayaran</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="payment-summary">
+                    <h3>Ringkasan Pembelian</h3>
+                    <div id="payment-items">
+                        <!-- Item pembayaran akan diisi oleh JavaScript -->
+                    </div>
+                    <div class="payment-total">
+                        <h3>Total Pembayaran: Rp <span id="payment-total">0</span></h3>
+                    </div>
+                </div>
+                <div class="payment-method">
+                    <h3>Metode Pembayaran</h3>
+                    <div class="payment-options">
+                        <label><input type="radio" name="payment" value="transfer" checked> Transfer Bank</label>
+                        <label><input type="radio" name="payment" value="e-wallet"> E-Wallet</label>
+                        <label><input type="radio" name="payment" value="cod"> COD (Bayar di Tempat)</label>
+                    </div>
+                </div>
+                <div class="payment-actions">
+                    <button id="confirm-payment" class="btn-primary">Konfirmasi Pembayaran</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="stores.js"></script>
+    <script src="script.js"></script>
+    <script>
+// Check authentication
+document.addEventListener('DOMContentLoaded', () => {
+    const token = localStorage.getItem('token');
+    const user = localStorage.getItem('user');
+    
+    if (!token || !user) {
+        window.location.href = 'login.html';
+        return;
+    }
+    
+    const userData = JSON.parse(user);
+    if (userData.user_type === 'admin') {
+        window.location.href = 'admin-dashboard.html';
+    }
+    
+    // Load marketplace content
+    initializeMarketplace();
+});
+
+function initializeMarketplace() {
+    // Your existing marketplace initialization code
+    renderStores();
+    updateCartDisplay();
+}
+
+// Logout function
+function logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    window.location.href = 'login.html';
+}
+
+// Add logout button to header (modify your header)
+const header = document.querySelector('header .container');
+header.innerHTML += `
+    <div class="user-menu">
+        <span id="user-name">Welcome</span>
+        <button onclick="logout()" class="btn-logout">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+    </div>
+`;
+
+// Update user name
+const userName = document.getElementById('user-name');
+const userData = JSON.parse(localStorage.getItem('user'));
+if (userData) {
+    userName.textContent = `Halo, ${userData.full_name}`;
+}
+</script>
+<script>
+// Force test add to cart
+setTimeout(() => {
+    console.log('🛒 FORCE TEST: Adding test item to cart');
+    if (typeof addToCart === 'function') {
+        addToCart(1, 1, 1); // Coba tambah smartphone
+    } else {
+        console.error('❌ addToCart function not found');
+    }
+}, 2000);
+</script>
+</body>
+</html>
