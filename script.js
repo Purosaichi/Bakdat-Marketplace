@@ -1,4 +1,4 @@
-// State aplikasi
+    // State aplikasi
 let cart = [];
 let currentStore = null;
 let currentChatStore = null;
@@ -566,9 +566,9 @@ function setupGlobalEventListeners() {
     });
 }
 
-// Main initialization
+// Main initialization - MODIFIED FOR GITHUB PAGES
 document.addEventListener('DOMContentLoaded', function() {
-    // Check authentication
+    // Check authentication - SIMPLE VERSION
     const token = localStorage.getItem('token');
     const user = localStorage.getItem('user');
     
@@ -585,11 +585,15 @@ document.addEventListener('DOMContentLoaded', function() {
         userName.textContent = `Halo, ${firstName}`;
     }
     
+    // Redirect admin to admin page
+    if (userData.user_type === 'admin') {
+        window.location.href = 'admin.html';
+        return;
+    }
+    
     // Setup semua event listeners
     setupGlobalEventListeners();
     
     // Initialize marketplace
     initializeMarketplace();
-    
-    console.log('✅ Marketplace initialized successfully');
 });
